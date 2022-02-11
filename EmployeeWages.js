@@ -15,23 +15,23 @@ const PART_TIME_HOURS = 4;
 const FULL_TIME_HOURS = 8;
 const WAGE_PER_HOUR = 20; 
 
-function calcDailyWage(empHrs) 
-{ 
-    return empHrs * WAGE_PER_HOUR;
-}
+     function calcDailyWage(empHrs) 
+     { 
+       return empHrs * WAGE_PER_HOUR;
+     }
      
-function getWorkingHours(empCheck) 
-{ 
-    switch (empCheck) //case
-        { 
-            case IS_PART_TIME: 
-                return PART_TIME_HOURS; 
-            case IS_FULL_TIME: 
-                return FULL_TIME_HOURS; 
-            default: 
-                return 0; 
-        } 
-}
+     function getWorkingHours(empCheck) 
+    { 
+      switch (empCheck) //case
+      { 
+        case IS_PART_TIME: 
+            return PART_TIME_HOURS; 
+        case IS_FULL_TIME: 
+            return FULL_TIME_HOURS; 
+        default: 
+            return 0; 
+    } 
+  }
 while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) 
     {
       totalWorkingDays++;
@@ -80,3 +80,36 @@ function fulltimeWage(dailyWage) {
 let fullDayWageArr = mapDayWithWageArr.filter(fulltimeWage); 
 console.log("UC7C - Daily Wage Filter When Fulltime Wage Earned"); 
 console. log(fullDayWageArr);
+
+
+// UC 7D - Find the first occurrence when Full Time Wage was earned using find function 
+function findFulltimeWage(daityWage) {
+    return dailyWage.includes("160");
+  }
+  console.log("UC 7D - First time Fulltime wage was earned on Day: ", 
+        mapDayWithWageArr.find(findFulltimeWage));
+  
+  // UC 7E - Check if Every Element of Full Time Wage is truely holding Full time wage 
+  function isAllFulltimeWage(dailyWage) {
+    return dailyWage.includes("160");
+  }
+
+  console.log("UC 6E - Check All Element have Full Time Wage: "+ 
+        fullDayWageArr.every(isAllFulltimeWage));
+  
+  // UC 7F - Check if there is any Part Time Wage 
+  function isAnyPartTimeWage(dailyWage) {
+    return dailyWage.includes("80");
+  }
+  console.log("UC 7F - Check If Any Part Time Wage: "+ 
+        mapDayWithWageArr.some(isAnyPartTimeWage));
+  
+  // UC 7G - Find the number of days the Employee Worked 
+  function totalDaysWorked(num0fDays, dailyWage) {
+        if (dailyWage > 0) 
+            return num0fDays+1;
+        return num0fDays;
+  }
+  
+  console.log("UC 7G - Number of Days Emp Worked: "+ 
+        empDailyWageArr.reduce(totalDaysWorked, 0));
