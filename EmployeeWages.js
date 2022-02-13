@@ -35,45 +35,28 @@ function calcDailyWage(empHrs)
     } 
   }
 
-
 function calcDailyWage(empHrs) { 
     return empHrs * WAGE_PER_HOUR; 
 }
-let i=1;
+// UC 10 Object Creation
+let empDailyHrsAndWageArr = new Array();
 while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) 
+{
+    totalWorkingDays++;
+    let empCheck = Math.floor(Math.random() * 10) % 3; 
+    let empHrs = getWorkingHours(empCheck);
+    totalEmpHrs += empHrs;
+    empDailyHrsAndWageArr.push(
     {
-        totalWorkingDays++;
-        let empCheck = Math.floor(Math.random() * 10) %3;
-        let empHrs = getWorkingHours(empCheck);
-        empDailyHrsMap.set(i,empHrs);
-        i++;
-        totalEmpHrs += empHrs;
-        empDailyWageArr.push(calcDailyWage(empHrs)); 
-        empDailyWageMap.set(totalWorkingDays, calcDailyWage(empHrs));
-}
-
-const findTotal = (totalVal, dailyVal) => { return totalVal + dailyVal;}
-
-let count = 0;
-
-let totalHours = Array.from(empDailyHrsMap.values())
-                            .reduce(findTotal, 0);
-let totalSalary = empDailyWageArr
-                            .filter(dailyWage => dailyWage > 0)
-                            .reduce(findTotal,0);
-
-console.log("UC9A - Emp Wage with Arrow.: " + " Total Hours: " + totalHours + " Total Wages: " + totalSalary);
-
-let nonWorkingDays = new Array(); 
-let partWorkingDays = new Array(); 
-let fullWorkingDays = new Array();
-empDailyHrsMap.forEach( (value, key,map) => {
-        if (value==8) 
-            fullWorkingDays.push(key);
-        else if (value == 4) 
-            partWorkingDays.push(key); 
-        else nonWorkingDays.push(key);
+        dayNum: totalWorkingDays,
+        dailyHours: empHrs,
+        dailyWage: calcDailyWage(empHrs),
+        //greet(){
+         //       return 'Hii.Its greet!'+this.dayNum;
+       // },
+       toString() {
+       return '\nDay' + this.dayNum + ' => Working Hours is ' + this.dailyHours + 
+        ' And Wage Earned = ' + this.dailyWage},
 });
-console.log("Full Working Days: "+fullWorkingDays); 
-console.log("Part Working Days: "+partWorkingDays); 
-console.log("Non Working Days: "+nonWorkingDays);
+}
+console.log("UC 10 Showing Daily Hours Worked and Wage Earned: "+empDailyHrsAndWageArr);
