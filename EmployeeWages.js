@@ -3,7 +3,6 @@
  * Created on: 09-Feb-2022
  * Employee Wages
  */
-//class
 class EmployeePayrollData{
   // property
   id;
@@ -28,7 +27,12 @@ class EmployeePayrollData{
   
   set name(name) 
   { 
-      this._name = name; 
+      let nameRegex=RegExp('^[A-Z]{1}[a-z]{3,}$')
+      if(nameRegex.test(name))
+          this._name = name;
+      else
+        throw "Name is Incorrect"
+ 
   }
   
   // method
@@ -41,12 +45,16 @@ class EmployeePayrollData{
     
   }
 }
- 
 //create object
 let employeePayrollData = new EmployeePayrollData(1, "Mark", 30000); 
 console.log(employeePayrollData.toString());
-employeePayrollData.name = "john";
-console.log(employeePayrollData.toString());
+//try
+try{
+  employeePayrollData.name = "john";
+  console.log(employeePayrollData.toString());
+}
+catch(e){
+  console.error(e);
+}
 let newEmployeePayrollData = new EmployeePayrollData(1, "Terrisa", 30000, "F", new Date()); 
 console.log(newEmployeePayrollData.toString());
- 
